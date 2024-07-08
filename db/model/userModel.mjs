@@ -2,16 +2,15 @@ import mongoose from "mongoose";
 import { pwdcrypt } from "../../utilitaire/pwdcrypt.mjs";
 import validator from "validator";
 
-const {Schema, model} = mongoose
-const { ObjectId } = Schema.Types;
+const {Schema, model} = mongoose;
 
 const userSchema = new Schema({
-    nom: {
+    name: {
         type: String,
         required: true,
         trim: true
     },
-    prenom: {
+    lastName: {
         type: String,
         required: true,
         trim: true
@@ -35,15 +34,21 @@ const userSchema = new Schema({
     avatar: {
         type: Buffer,
         required: false,
-    },
-    command: {
-        type: ObjectId,
-        required: true
+    }
+},{
+    toJSON:{
+        transform(doc, ret){
+            delete ret.password;
+            delete ret.__v;
+        }
     }
 })
 
-userSchema.pre("save", async () =>{
-    this.password = await pwdcrypt(this.password);
+userSchema.pre("save", async function(next){
+    if(this.isNew){
+        this.password = await pwdcrypt(this.password);
+    }
+    next();
 })
 
 export  const userModel = model("users", userSchema);

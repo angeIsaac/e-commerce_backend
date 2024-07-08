@@ -1,9 +1,9 @@
 import express from "express";
 import { postUser } from "../controllers/usersControllers.mjs";
 
-const router = express.Router();
+const userRouter = express.Router();
 
-router.post("/", postUser);
+userRouter.post("/", postUser);
 
 
-export default router;
+export default userRouter;

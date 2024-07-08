@@ -6,7 +6,7 @@ import logger from "morgan"
 import path from "path";
 import cookieParser from "cookie-parser";
 import connectDb from "./db/conection.mjs"
-import router from "./routes/userRoute.mjs";
+import userRouter from "./routes/userRoute.mjs";
 
 const app = express();
 
@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // nos different route
-app.use("/api/v1/user", router)
+app.use("/user", userRouter)
 
 app.use(function(req, res, next) {
     next(createError(404));

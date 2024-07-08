@@ -5,7 +5,7 @@ const postUser = async (req, res) => {
     try {
         const {body} = req;
         const result = await create(body);
-        return res.status(200).jsson(result);
+        return res.status(200).json(result);
     } catch (error) {
         console.log(error.message)
     }
