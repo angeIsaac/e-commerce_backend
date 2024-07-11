@@ -1,4 +1,7 @@
 import { userModel } from "../model/userModel.mjs";
+import mongoose from "mongoose";
+
+const {Schema: {Types:{ObjectId}}} = mongoose;
 
 
 const create = async data => {
@@ -12,7 +15,7 @@ const create = async data => {
 
 const getAllUsers = async () => {
     try {
-        const result = userModel.find();
+        const result = await userModel.find();
         return result
     } catch (error) {
         console.log(error.message);
@@ -21,7 +24,7 @@ const getAllUsers = async () => {
 
 const getUser = async id => {
     try {
-        const result = userModel.findById(id);
+        const result = await userModel.findById(id);
         return result
     } catch (error) {
         console.log(error.message);
@@ -30,7 +33,7 @@ const getUser = async id => {
 
 const deleteUser = async id => {
     try {
-        const result = userModel.findByIdAndDelete(id);
+        const result = await userModel.deleteOne({_id: id});
         return result
     } catch (error) {
         console.log(error.message);
@@ -39,12 +42,8 @@ const deleteUser = async id => {
 
 const updateUser = async (id, data) => {
     try {
-        const user = userModel.findById(id);
-        if(!user){
-            return {status: 404, message: "l'utilisatuer n'existe pas", data: null}
-        }
-        const result = await user.set(data).save();
-        return {status: 201, message: "mise ajour reussie", data: {...result}}
+        const result = await userModel.updateOne({_id: id}, data);
+        return result;
     } catch (error) {
         console.log(error.message);
     }

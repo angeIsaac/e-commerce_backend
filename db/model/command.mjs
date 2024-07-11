@@ -2,22 +2,24 @@ import mongoose from "mongoose";
 
 
 const {Schema, model} = mongoose;
-const { ObjectId } = Schema.Types;
+const { Types: {ObjectId} } = Schema;
 
 const cmmandSchema = new Schema({
     date: {
-        Type: Date,
+        type: Date,
         required: true,
-        default: Date.now()
+        default: Date.now
     },
     user: {
-        Type: ObjectId,
+        type: ObjectId,
+        ref: "users",
         required: true,
         unique: true
     },
     product:{
-        Type: ObjectId,
-        required: false
+        type: ObjectId,
+        ref: "products",
+        required: true
     }
 });
 

@@ -31,9 +31,9 @@ const updateProduct = async (id, data) => {
     }
 };
 
-const getProduct = async query => {
+const getProduct = async () => {
     try {
-        const result = await productModel.find(query);
+        const result = await productModel.find();
         return result
     } catch (error) {
         return error.message;
