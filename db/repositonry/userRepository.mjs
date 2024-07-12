@@ -1,7 +1,4 @@
 import { userModel } from "../model/userModel.mjs";
-import mongoose from "mongoose";
-
-const {Schema: {Types:{ObjectId}}} = mongoose;
 
 
 const create = async data => {
@@ -22,9 +19,18 @@ const getAllUsers = async () => {
     }
 }
 
-const getUser = async id => {
+const getUserById = async id => {
     try {
         const result = await userModel.findById(id);
+        return result
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+const getUser = async query => {
+    try {
+        const result = await userModel.findOne(query);
         return result
     } catch (error) {
         console.log(error.message);
@@ -54,5 +60,6 @@ export const userRepo = {
     updateUser,
     getAllUsers,
     getUser,
-    deleteUser
+    deleteUser,
+    getUserById
 }

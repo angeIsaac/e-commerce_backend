@@ -7,8 +7,8 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import connectDb from "./db/conection.mjs"
 import userRouter from "./routes/userRoute.mjs";
-import productRouter from "./routes/prodRoutes.mjs"
-import commandRouter from "./routes/commandRoutes.mjs"
+import productRouter from "./routes/prodRoutes.mjs";
+import commandRouter from "./routes/commandRoutes.mjs";
 
 const app = express();
 
@@ -22,9 +22,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // nos different route
-app.use("/user", userRouter);
-app.use("/product", productRouter);
-app.use("/command", commandRouter);
+app.use("/api/user", userRouter);
+app.use("/api/product", productRouter);
+app.use("/api/command", commandRouter);
 
 // app.use(function(req, res, next) {
 //     next(createError(404));

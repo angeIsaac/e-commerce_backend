@@ -14,7 +14,6 @@ const cmmandSchema = new Schema({
         type: ObjectId,
         ref: "users",
         required: true,
-        unique: true
     },
     product:{
         type: ObjectId,

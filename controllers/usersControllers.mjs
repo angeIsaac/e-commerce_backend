@@ -1,6 +1,6 @@
 import { isValidObjectId } from "mongoose";
 import {userRepo} from "../db/repositonry/index.mjs"
-const { create, deleteUser, updateUser, getUser} = userRepo;
+const { create, deleteUser, updateUser, getUserById} = userRepo;
 
 const postUser = async (req, res) => {
     try {
@@ -42,7 +42,7 @@ const delUser = async (req, res) => {
 const getOneUser = async (req, res) => {
     const {id} = req.params;
     try {
-        const result = await getUser(id);
+        const result = await getUserById(id);
         return res.status(200).json(result);
     } catch (error) {
         console.log(error.message)
